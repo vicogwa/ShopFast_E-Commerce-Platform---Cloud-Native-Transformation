@@ -45,9 +45,9 @@ app.get('/api/health', async (req, res) => {
 });
 
 // API routes
-app.use('/api/users', require('./routes/userRoutes'));
-app.use('/api/products', require('./routes/productRoutes'));
-app.use('/api/orders', require('./routes/orderRoutes'));
+app.use('/api/users', require('./routes/userRoute.cjs'));
+app.use('/api/products', require('./routes/productRoute.cjs'));
+app.use('/api/orders', require('./routes/orderRoute.cjs'));
 
 // Error handler
 app.use((err, req, res, next) => {
