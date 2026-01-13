@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
-export default {
+module.exports = {
   PORT: process.env.PORT || 5000,
   // Database Configuration
   DB_HOST: process.env.DB_HOST || 'localhost',

@@ -1,6 +1,6 @@
-import express from 'express';
-import Product from '../models/productModel';
-import { isAuth, isAdmin } from '../util';
+const express = require('express');
+const Product = require('../models/productModel.cjs');
+const { isAuth, isAdmin } = require('../util.cjs');
 
 const router = express.Router();
 
@@ -107,4 +107,4 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
   return res.status(500).send({ message: ' Error in Creating Product.' });
 });
 
-export default router;
+module.exports = router;
