@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const pool = require('./config/database.cjs');
-const redisClient = require('./config/redis');
+const redisClient = require('./config/redis.cjs');
 
 // Load environment variables
 dotenv.config();
