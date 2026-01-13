@@ -1,0 +1,40 @@
+# Node
+node_modules/
+npm-debug.log*
+.npm
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# AWS
+*.pem
+*.key
+.aws/
+
+# Secrets
+secrets/
+credentials/
