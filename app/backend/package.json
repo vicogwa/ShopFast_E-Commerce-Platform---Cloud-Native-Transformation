@@ -2,7 +2,7 @@
   "name": "shopfast-backend",
   "version": "1.0.0",
   "description": "ShopFast E-commerce Backend API",
-  "type": "module",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node server.cjs",
