@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "ShopFast E-commerce Backend API",
   "type": "commonjs",
-  "main": "server.js",
+  "main": "server.cjs",
   "scripts": {
     "start": "node server.cjs",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.cjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
