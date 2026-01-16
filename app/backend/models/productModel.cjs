@@ -1,28 +1,36 @@
-const mongoose = require('mongoose');
+const pool = require("../config/database.cjs");
 
-const reviewSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    rating: { type: Number, default: 0 },
-    comment: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  }
-);
-const prodctSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  image: { type: String, required: true },
-  brand: { type: String, required: true },
-  price: { type: Number, default: 0, required: true },
-  category: { type: String, required: true },
-  countInStock: { type: Number, default: 0, required: true },
-  description: { type: String, required: true },
-  rating: { type: Number, default: 0, required: true },
-  numReviews: { type: Number, default: 0, required: true },
-  reviews: [reviewSchema],
-});
+// Create a product
+const createProduct = async (product) => {
+  const {
+    name, image, brand, price, category, countInStock,
+    description, rating = 0, numReviews = 0
+  } = product;
 
-const productModel = mongoose.model('Product', prodctSchema);
+  const result = await pool.query(
+    `INSERT INTO products
+     (name, image, brand, price, category, count_in_stock, description, rating, num_reviews)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+     RETURNING *`,
+    [name, image, brand, price, category, countInStock, description, rating, numReviews]
+  );
+  return result.rows[0];
+};
 
-module.exports = productModel;
+// Get all products
+const getAllProducts = async () => {
+  const result = await pool.query(`SELECT * FROM products`);
+  return result.rows;
+};
+
+// Get product by ID
+const getProductById = async (id) => {
+  const result = await pool.query(`SELECT * FROM products WHERE id = $1`, [id]);
+  return result.rows[0];
+};
+
+module.exports = {
+  createProduct,
+  getAllProducts,
+  getProductById,
+};

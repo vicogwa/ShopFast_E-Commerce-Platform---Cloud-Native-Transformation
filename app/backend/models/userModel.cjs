@@ -1,14 +1,36 @@
-const mongoose = require('mongoose');
+const pool = require("../config/database.cjs");
 
-const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: {
-    type: String, required: true, unique: true, index: true, dropDups: true,
-  },
-  password: { type: String, required: true },
-  isAdmin: { type: Boolean, required: true, default: false },
-});
+// Create a user
+const createUser = async ({ name, email, password, isAdmin = false }) => {
+  const result = await pool.query(
+    `INSERT INTO users (name, email, password, is_admin)
+     VALUES ($1, $2, $3, $4)
+     RETURNING *`,
+    [name, email, password, isAdmin]
+  );
+  return result.rows[0];
+};
 
-const userModel = mongoose.model('User', userSchema);
+// Get user by email
+const getUserByEmail = async (email) => {
+  const result = await pool.query(
+    `SELECT * FROM users WHERE email = $1`,
+    [email]
+  );
+  return result.rows[0];
+};
 
-module.exports = userModel;
+// Get user by ID
+const getUserById = async (id) => {
+  const result = await pool.query(
+    `SELECT * FROM users WHERE id = $1`,
+    [id]
+  );
+  return result.rows[0];
+};
+
+module.exports = {
+  createUser,
+  getUserByEmail,
+  getUserById,
+};
